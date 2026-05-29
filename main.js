@@ -454,12 +454,68 @@ function initAnimations() {
   els.forEach(el => obs.observe(el));
 }
 
+/* ─── Infinite Project Rail for Mobile ───── */
+function initProjectsRailLoop() {
+  const rail = document.querySelector('.projects-rail');
+  const track = document.querySelector('.projects-track');
+  if (!rail || !track) return;
+
+  let isMobile = window.innerWidth <= 700;
+  let loopWidth = track.scrollWidth / 2;
+
+  const resetScrollPosition = () => {
+    if (isMobile && loopWidth > 0) {
+      rail.scrollLeft = loopWidth;
+    }
+  };
+
+  window.addEventListener('load', () => {
+    loopWidth = track.scrollWidth / 2;
+    resetScrollPosition();
+  });
+
+  setTimeout(() => {
+    loopWidth = track.scrollWidth / 2;
+    resetScrollPosition();
+  }, 400);
+
+  let isAdjusting = false;
+  rail.addEventListener('scroll', () => {
+    if (!isMobile || isAdjusting) return;
+
+    loopWidth = track.scrollWidth / 2;
+    if (loopWidth <= 0) return;
+
+    const currentScroll = rail.scrollLeft;
+
+    if (currentScroll <= 10) {
+      isAdjusting = true;
+      rail.scrollLeft = currentScroll + loopWidth;
+      isAdjusting = false;
+    } else if (currentScroll >= (loopWidth * 2) - rail.clientWidth - 10) {
+      isAdjusting = true;
+      rail.scrollLeft = currentScroll - loopWidth;
+      isAdjusting = false;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    const wasMobile = isMobile;
+    isMobile = window.innerWidth <= 700;
+    loopWidth = track.scrollWidth / 2;
+    if (isMobile && !wasMobile) {
+      resetScrollPosition();
+    }
+  });
+}
+
 /* ─── Boot ────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initHamburger();
   initLangSwitcher();
   initAnimations();
+  initProjectsRailLoop();
   applyLang(currentLang);
 });
 
