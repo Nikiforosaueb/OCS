@@ -577,7 +577,7 @@ p {
 
 /* ─── 7. Stats strip ────────────────────────── */
 .stats-strip {
-  background: var(--clr-surface);
+  background: transparent;
   border-top: 1px solid var(--clr-border);
   border-bottom: 1px solid var(--clr-border);
   padding: 2.5rem 0;
