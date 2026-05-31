@@ -1276,26 +1276,26 @@ footer {
   }
 
   .srv-blueprint-col {
-    position: relative;
-    width: 100%;
-    height: 40vw;
-    min-height: 260px;
-    order: 1;
-    padding: 1.5rem;
-    opacity: 0.3;
+    display: none;
   }
 
   .srv-panels-col {
-    order: 2;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
   }
 
   .srv-panel {
-    padding: 10vh 6vw;
+    min-height: auto;
+    padding: 3rem 1.25rem;
     gap: 1rem;
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .srv-panel-title {
+    font-size: clamp(1.8rem, 7.5vw, 2.5rem);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .srv-panel-vline {
@@ -1303,7 +1303,7 @@ footer {
   }
 
   .srv-panel-ghost {
-    font-size: clamp(8rem, 30vw, 14rem);
+    font-size: clamp(6rem, 25vw, 10rem);
   }
 
   .srv-dots,
