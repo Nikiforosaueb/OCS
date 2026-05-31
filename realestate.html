@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Estate — OCS | Κατασκευές &amp; Ανακαινίσεις</title>
+  <meta name="description" content="Online Construction Services (OCS) — Real Estate page coming soon." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Page Specific Styles for Premium Minimal & Chic Coming Soon Content */
+    body.page-realestate {
+      background-color: #050508;
+    }
+    
+    .realestate-hero {
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .minimal-coming-soon {
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-badge {
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--clr-grey-500);
+      margin-bottom: 3.5rem;
+      position: relative;
+      opacity: 0;
+    }
+
+    .brand-badge::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .headline-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      width: 100%;
+    }
+
+    .headline-segment {
+      opacity: 0;
+    }
+
+    .headline-segment.thin {
+      font-family: var(--font-head);
+      font-weight: 300;
+      font-size: clamp(1.3rem, 3vw, 2.2rem);
+      letter-spacing: 0.22em;
+      text-indent: 0.22em;
+      color: var(--clr-grey-300);
+      text-transform: uppercase;
+    }
+
+    .headline-segment.bold {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: 0.08em;
+      text-indent: 0.08em;
+      color: var(--clr-white);
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .headline-segment.bold.highlight {
+      background: linear-gradient(180deg, #ffffff 30%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+    }
+
+    .headline-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 80%, transparent);
+      margin: 2.2rem auto;
+      transform: scaleX(0);
+    }
+
+    .coming-soon-footer {
+      margin-top: 4.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      opacity: 0;
+    }
+
+    .status-tag {
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-indent: 0.3em;
+      text-transform: uppercase;
+      color: var(--clr-grey-300);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.6rem 1.6rem;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.01);
+      backdrop-filter: blur(5px);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .chic-spinner {
+      width: 12px;
+      height: 12px;
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      border-top-color: var(--clr-white);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+      margin-top: -1px;
+    }
+
+    .btn-chic {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-indent: 0.2em;
+      text-transform: uppercase;
+      color: var(--clr-white);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.6rem 0.5rem;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .btn-chic:hover {
+      color: var(--clr-white);
+      border-bottom-color: var(--clr-white);
+      letter-spacing: 0.25em;
+      text-indent: 0.25em;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    /* RTL specific overrides */
+    [dir="rtl"] .brand-badge,
+    [dir="rtl"] .headline-segment,
+    [dir="rtl"] .status-tag,
+    [dir="rtl"] .btn-chic {
+      text-indent: 0;
+    }
+
+    /* Chic animations */
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleX {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-slide-up-1 { animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .animate-slide-up-2 { animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; }
+    .animate-slide-up-3 { animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
+    .animate-slide-up-4 { animation: slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards; }
+
+    .animate-fade-in { animation: fadeIn 1.5s ease forwards; }
+    .animate-fade-in-delayed { animation: fadeIn 1.5s ease 0.8s forwards; }
+    .animate-scale-x { 
+      animation: scaleX 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; 
+      transform-origin: center; 
+    }
+
+    @media (max-width: 768px) {
+      .realestate-hero {
+        padding: 40px 0;
+      }
+      .brand-badge {
+        margin-bottom: 2rem;
+      }
+      .headline-divider {
+        margin: 1.5rem auto;
+      }
+      .coming-soon-footer {
+        margin-top: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="page-realestate">
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/images/LOGO2.png" alt="OCS Logo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html"         data-i18n="nav_home">Home</a></li>
+      <li><a href="about.html"         data-i18n="nav_about">About</a></li>
+      <li><a href="services.html"      data-i18n="nav_services">Services</a></li>
+      <li><a href="projects.html"      data-i18n="nav_projects">Projects</a></li>
+      <li><a href="realestate.html"    data-i18n="nav_realestate">Real Estate</a></li>
+      <li><a href="contact.html"       data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="el">GR</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="he">עב</button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile">
+  <a href="index.html"         data-i18n="nav_home">Home</a>
+  <a href="about.html"         data-i18n="nav_about">About</a>
+  <a href="services.html"      data-i18n="nav_services">Services</a>
+  <a href="projects.html"      data-i18n="nav_projects">Projects</a>
+  <a href="realestate.html"    data-i18n="nav_realestate">Real Estate</a>
+  <a href="contact.html"       data-i18n="nav_contact">Contact</a>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="el">GR</button>
+    <button class="lang-btn" data-lang="zh">中</button>
+    <button class="lang-btn" data-lang="he">עב</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     HERO CONTENT
+════════════════════════════════════════════ -->
+<section class="realestate-hero">
+  <div class="container">
+    <div class="minimal-coming-soon">
+      <div class="brand-badge animate-fade-in" data-i18n="realestate_sub_brand">OCS Real Estate</div>
+      
+      <div class="headline-group">
+        <div class="headline-segment thin animate-slide-up-1">
+          <span data-i18n="realestate_tagline_1">Finding a property</span>
+        </div>
+        <div class="headline-segment bold animate-slide-up-2">
+          <span data-i18n="realestate_tagline_2">is easy.</span>
+        </div>
+        
+        <div class="headline-divider animate-scale-x"></div>
+        
+        <div class="headline-segment thin animate-slide-up-3">
+          <span data-i18n="realestate_tagline_3">Finding the right one</span>
+        </div>
+        <div class="headline-segment bold highlight animate-slide-up-4">
+          <span data-i18n="realestate_tagline_4">is not.</span>
+        </div>
+      </div>
+
+      <div class="coming-soon-footer animate-fade-in-delayed">
+        <div class="status-tag">
+          <span class="chic-spinner"></span>
+          <span data-i18n="realestate_coming_soon">Coming Soon</span>
+        </div>
+        <a href="contact.html" class="btn-chic" data-i18n="cta_btn">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/LOGO1.png" alt="OCS Logo" />
+        <p data-i18n="footer_tagline">Premium construction and renovation services — built on quality, delivered with precision.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_nav">Navigation</h4>
+        <ul>
+          <li><a href="index.html"    data-i18n="nav_home">Home</a></li>
+          <li><a href="about.html"    data-i18n="nav_about">About</a></li>
+          <li><a href="services.html" data-i18n="nav_services">Services</a></li>
+          <li><a href="projects.html" data-i18n="nav_projects">Projects</a></li>
+          <li><a href="realestate.html" data-i18n="nav_realestate">Real Estate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_services">Services</h4>
+        <ul>
+          <li><a href="services.html#new-constructions" data-i18n="s1_title">New Constructions</a></li>
+          <li><a href="services.html#renovations"       data-i18n="s2_title">Renovations</a></li>
+          <li><a href="services.html#engineering"       data-i18n="s3_title">Engineering &amp; Technical</a></li>
+          <li><a href="services.html#exterior"          data-i18n="s4_title">Exterior &amp; Energy</a></li>
+          <li><a href="services.html#supervision"       data-i18n="s5_title">Project Supervision</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_contact_title">Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <div>
+            <span style="display:block;color:var(--clr-grey-500);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;" data-i18n="pm_label">Project Manager</span>
+            <span>Eteoklis Stasinopoulos</span>
+          </div>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.08 3.4a2 2 0 0 1 1.95-2.18h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 8 8l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 23 17z"/></svg>
+          <span><a href="tel:6937333421">6937333421</a></span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#686868" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span><a href="mailto:e.stasinopoulos@ocs.gr">e.stasinopoulos@ocs.gr</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer_copy">© 2024 Online Construction Services (OCS). All rights reserved.</p>
+      <a href="cookie-policy.html" data-i18n="cookie_link">Cookie &amp; Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+
+</body>
+</html>
